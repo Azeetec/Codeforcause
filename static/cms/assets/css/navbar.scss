@@ -1,0 +1,218 @@
+$primary-color: #EE3C7F;
+$base-color: black;
+
+
+
+.navbar {
+  background: transparent;
+  transition: background-color 1s ease 0s;
+  width: 100%;
+  margin: 0;
+  padding: 5px 40px;
+  &.solid {
+    position: fixed;
+    top: 0;
+    background-color: #000000d1;
+    width: 100%;
+    box-shadow: 0 5px 10px rgba(211, 211, 211, 0.4);
+    padding: 4px 40px;
+    .navbar-brand {
+      width: 48px;
+      img {
+        width: 100%;
+      }
+    }
+    .navbar-nav {
+      .nav-item {
+        .nav-link {
+          color: white;
+
+          &:hover {
+            color: white;
+          }
+        }
+
+        &.active, &:hover {
+          .nav-link {
+            border-bottom: 2px solid white;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-brand {
+    width: 56px;
+    //width: 50px;
+    //padding-left: 24px;
+    img {
+      width: 100%;
+    }
+  }
+
+  .navbar-nav {
+    .nav-item {
+      padding: 0 5px;
+
+      .nav-link {
+        color: white;
+        font-size: 16px;
+        display: inline-block;
+
+        &:hover {
+          color: #9d9fc6;
+        }
+      }
+      &.active, &:hover {
+        .nav-link {
+          border-bottom: 2px solid $primary-color;
+          color: $primary-color;
+        }
+      }
+    }
+    .button {
+      font-size: 20px;
+      padding: 5px 20px 0;
+    }
+  }
+}
+
+//.navbar-toggler {
+//  border-color: rgba(49, 222, 54, 0.3);
+//}
+
+.navbar-toggler-icon {
+  //background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(49,222,54, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  i {
+    color: white;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .navbar {
+    //padding: 0;
+    .navbar-brand {
+      width: 30px;
+      h5 {
+        font-size: 1rem;
+      }
+    }
+    .navbar-nav {
+      .nav-item {
+        padding: 0 1px;
+        .nav-link {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+}
+@media only screen and (max-width: 900px) {
+  .navbar {
+    padding: 0 20px;
+    .navbar-collapse {
+      //background-color: black;
+      //box-shadow: 0 5px 20px lightgrey;
+      //height: 70%;
+      //width: 100%;
+      //margin: 10px 0;
+      position: fixed;
+      right: -100%;
+      top: 40px;
+      bottom: 0;
+      z-index: 5;
+      width: 50%;
+      background: black;
+      box-shadow: 0 0 50px #212020;
+      padding: 15px;
+      transition: all 0.3s ease;
+      &.show {
+        right: 0;
+        transition: all 0.3s ease;
+      }
+    }
+
+    .navbar-nav {
+      .nav-item {
+        padding: 5px;
+      }
+      .nav-link {
+        font-size: 16px;
+      }
+      .button {
+        margin: auto;
+        width: 55%;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  .navbar-toggler.x {
+    border: none;
+    &:focus {
+      outline: none;
+    }
+    &[aria-expanded="true"] {
+      .icon-bar {
+        &:nth-of-type(1) {
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+          -webkit-transform-origin: 10% 10%;
+          -ms-transform-origin: 10% 10%;
+          transform-origin: 10% 10%;
+        }
+        &:nth-of-type(2) {
+          opacity: 0;
+          filter: alpha(opacity=0);
+        }
+        &:nth-of-type(3) {
+          -webkit-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+          -webkit-transform-origin: 10% 90%;
+          -ms-transform-origin: 10% 90%;
+          transform-origin: 10% 90%;
+        }
+      }
+    }
+    .icon-bar {
+      width: 22px;
+      display: block;
+      height: 2px;
+      background-color: #fff;
+      -webkit-transition: all 0.2s;
+      transition: all 0.5s;
+      &+ .icon-bar {
+        margin-top: 4px;
+      }
+      &:nth-of-type(1) {
+        -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
+        transform: rotate(0);
+      }
+      &:nth-of-type(2) {
+        opacity: 1;
+        filter: alpha(opacity=100);
+      }
+      &:nth-of-type(3) {
+        -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
+        transform: rotate(0);
+      }
+    }
+  }
+}
+@media only screen and (max-width: 420px) {
+  .navbar {
+    .navbar-collapse {
+      width: 70%;
+    }
+  }
+  
+}
+
+
+

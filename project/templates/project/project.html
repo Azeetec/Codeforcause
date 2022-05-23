@@ -1,0 +1,56 @@
+{% extends 'product_category/base/base.html' %}
+{% load static %}
+{% block title %}
+<title> Freelancer |  Project Listing </title>
+{% endblock %} 
+{% block content %}
+<div class="main-container">
+
+
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-100vh">
+            <div class="card shadow p-3 mb-30">
+                <div class="pb-20">
+                    <div class="table-responsive">
+                        <table class="table hover table-bordered data-table-export text-center">
+                            <thead class="bg-dark text-white">
+                            <tr>
+                                <th>S.no</th>
+                                <th>Name</th>
+                                <th>TimeFrame</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              {% for one in all_projects %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{one.title|capfirst}}</td>
+                                <td>{{one.timeframe}} Days</td>
+                                <td>
+                                    <span class="badge badge-success">{% if one.is_deliver is True %} Completed {% else %} Pending {% endif %}</span>
+                                </td>
+                                <td>
+                                    <a href="/view_project/?id={{one.id}}" class="table-icon" title="View Project">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="footer-wrap py-2 card-box">
+</div>
+{% endblock %}

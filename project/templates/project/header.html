@@ -1,0 +1,34 @@
+{% load static %}
+<!--------------------------------Header start --------------------------------->
+
+<nav class="navbar navbar-expand-lg fixed-top  {% if request.resolver_match.url_name == 'coming_soon' %}bg-dark{% endif %}">
+    <a class="navbar-brand" href="">
+        <img src="{% static 'cms/assets/images/Icon.png' %}" alt="image">
+    </a>
+    <button class="navbar-toggler x" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!--        <span class="navbar-toggler-icon"></span>-->
+        <!--        <i class="fas fa-bars"></i>-->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %} nav-item">
+            <a class="nav-link" href="/home/">Home</a>
+          </li>
+          <li class="{% if request.resolver_match.url_name == 'live_selling' %}active{% endif %} nav-item">
+            <a class="nav-link" href="/about/">About Us</a>
+          </li>
+        </ul>
+        {% if not request.user.is_authenticated %}
+        <a href="{% url 'RegisterScreen' %}"
+           class="custom-btn btn-2 ml-lg-4 text-decoration-none font-weight-bold mt-3 mt-lg-0">Registration</a>
+        {% else %}
+        <a href=""
+           class="custom-btn btn-2 ml-lg-4 text-decoration-none font-weight-bold mt-3 mt-lg-0">Logout</a>
+        {% endif %}
+    </div>
+</nav>
+<!--------------------------------Header end --------------------------------->

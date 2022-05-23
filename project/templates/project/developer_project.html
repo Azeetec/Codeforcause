@@ -1,0 +1,178 @@
+{% extends 'product_category/base/base.html' %}
+{% load static %}
+{% load str_function %}
+
+{% block title %}
+<title> Freelancer |  View Project </title>
+{% endblock %} 
+{% block content %}
+<div class="main-container">
+   <div class="pd-ltr-20 xs-pd-20-10">
+              {% if messages %}
+      {% for message in messages %}
+      {% if 'success' in message.tags %}
+      <div class="alert alert-success" id = "msg_Sucess">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% if messages %}
+      {% for message in messages %}
+      {% if 'error' in message.tags %}
+      <div class="alert alert-danger" id="msg_sign_err">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {% if message %}
+      <div class="alert alert-danger" >
+         {{ message }}
+      </div>
+      {% endif %}
+      {% if sucess_msg %}
+      <div class="alert alert-success">
+         {{ sucess_msg }}
+      </div>
+      {% endif %}
+
+      <div class="min-height-100vh">
+         <div class="card mb-30 shadow p-3">
+            <h2>Manage Project</h2>
+         </div>
+         {% for obj in all_projects %}
+
+         <div class="card shadow my-3">
+            <div class="card-header p-1">
+               <div class="row">
+                  <div class="col-3 text-center">
+                     <small>Project Placed</small>
+                     <br>
+                     <small>{{obj.created_on}}</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>TimeFrame</small>
+                     <br>
+                     <small><i class="fas fa-rupee-sign mr-2"></i>{{obj.timeframe}} Days</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>Added By</small>
+                     <br>
+                     <small>{{obj.user_instance.username}}</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>Project ID</small>
+                     <br>
+                     <small># {{obj.id}}</small>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div class="text-right">
+                  {% order_started obj.id request.user.id as resultt %}
+
+                  {% if resultt == 'In Progress' %}
+
+                  <button class="btn button mt-1" data-toggle="modal" data-target="#deliver_{{obj.id}}">Deliver</button>
+                     <div class="modal fade " id="deliver_{{obj.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Deliver Order</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <form action = "/deliver/" method="POST" class="row" id="edit_inventory" enctype="multipart/form-data">
+                                 <input type="hidden" name="id" value="{{obj.id}}">
+                                 {% csrf_token %}
+                                 <div class="col-12 form-group">
+                                    <textarea class="form-control" name = "description"  type="text" placeholder="Description" id="description_popup" onkeyup="DescriptionInventory()" rows="13"></textarea>
+                                 </div>
+                                <div class="col-md-12 form-group">
+                                    <input class="form-control" name = "file"  type="file" placeholder="Document " >
+                                 </div>
+                                 <div class="col-12 text-center">
+                                    <button class="btn btn-outline-dark">Deliver Order</button>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                     </div>
+
+                  {% endif %}
+
+                  {% applied obj.id request.user.id as result %}
+                  {% if obj.files %}<a href ="{{obj.files.url}}"><button class="btn button mt-1">Download Doc</button></a> {% else %} <button class="btn button mt-1">No Doc</button> {% endif %}
+                     
+                  
+                     <button class="btn button mt-1">{% order_started obj.id request.user.id %}</button>
+                  
+
+                  {% if result %}
+                     <button class="btn button mt-1">Offer Sent</button>
+                  {% else %}
+                     <button class="btn button mt-1" data-toggle="modal" data-target="#offer_{{obj.id}}">Send Offer</button>
+
+                     <div class="modal fade " id="offer_{{obj.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Send Offer</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <div class="alert alert-success" id = "edit_catg_success" style="display: none"></div>
+                              <div class="alert alert-error" id = "edit_cat_popup_error" style="display: none"></div>
+                              <form action = "/bid/" method="POST" class="row" id="edit_inventory">
+                                 <input type="hidden" name="id" value="{{obj.id}}">
+                                 {% csrf_token %}
+                                 <div class="col-12 form-group">
+                                    <textarea class="form-control" name = "description"  type="text" placeholder="Description" id="description_popup" onkeyup="DescriptionInventory()" rows="13"></textarea>
+                                 </div>
+                                <div class="col-md-12 form-group">
+                                    <input class="form-control" name = "timeframe"  type="number" placeholder="TimeFrame (In days)" >
+                                 </div>
+                                 <div class="col-12 text-center">
+                                    <button class="btn btn-outline-dark">Send Offer</button>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                     </div>
+                  {% endif %}
+
+                  {% develop obj.id request.user.id as result %}
+                  {% if result %}
+
+                     <a href="/chat1/?id={{can_chat}}"><button type="button" class="btn btn-success px-1 py-0 mr-1"><i class="fas fa-envelope font-14"></i></button></a>
+
+                  {% endif %}
+
+
+
+               </div>
+               <div class="row">
+                  <div class="col-md-12 text-center my-auto">
+                     <small class="text-secondary d-none d-md-block">{{obj.description}}</small>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+         {% endfor %}
+
+      </div>
+   </div>
+</div>
+</div>
+
+</script>
+{% endblock %}

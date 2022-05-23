@@ -1,0 +1,139 @@
+{% extends 'product_category/base/base.html' %}
+{% load static %}
+{% block title %}
+<title> Freelancer |  View Project </title>
+{% endblock %} 
+{% block content %}
+<div class="main-container">
+   <div class="pd-ltr-20 xs-pd-20-10">
+      <div class="min-height-100vh">
+         <div class="card mb-30 shadow p-3">
+            <h2>Manage Project</h2>
+         </div>
+         <div class="card shadow my-3">
+            <div class="card-header p-1">
+               <div class="row">
+                  <div class="col-3 text-center">
+                     <small>Project Placed</small>
+                     <br>
+                     <small>{{obj.created_on}}</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>TimeFrame</small>
+                     <br>
+                     <small><i class="fas fa-rupee-sign mr-2"></i>{{obj.timeframe}} Days</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>Added By</small>
+                     <br>
+                     <small>{{obj.user_instance.username}}</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>Project ID</small>
+                     <br>
+                     <small># {{obj.id}}  {{obj.is_selected}}</small>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div class="text-right">
+                  <i class="fas fa-circle text-success mr-2"></i>{% if obj.files %}<a href ="{{obj.files.url}}">Doc Download</a> {% else %} No File {% endif %}
+
+                  {% if order_detail.is_deliver is True and order_detail.is_completed is False %}
+                  <a href="/ReviewDelivery/?id={{order_detail.id}}"><i class="fas fa-envelope text-success mr-2"></i>Review Delivery</a>
+                  {% endif %}
+
+               </div>
+               <div class="row">
+                  <div class="col-md-12 text-center my-auto">
+                     <h5>Assignee -:{% if order_detail %} {% if order_detail.is_completed is True %} Completed {% elif order_detail.is_deliver is True %} Assigned to {{one_assignee.user_instance.username}} (DELIVERED) {% elif order_detail.is_cancelled is True %} CANCELLED {% else %} In Progress {% endif %} {% else %} No Developer Yet{% endif %}</h5>
+                     <small class="text-secondary d-none d-md-block">{{obj.description}}</small>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row justify-content-center mb-30">
+            {% for one in all_assignee %}
+            <div class="col-lg-3 col-md-4 col-sm-6 my-2">
+               <div class="card shadow p-3">
+                  <a href="/developer_profile/?id={{one.user_instance.id}}"><h5 class="text-center">{{one.user_instance.username}}</h5></a>
+                  <p class="font-14 text-secondary text-center mb-0 p-0 mt-2">TimeFrame : {{one.timeframe}} Days</p>
+                  <p class="font-14 text-secondary text-center m-0 p-0">Phone : {{one.user_instance.phone}}</p>
+                  <p class="font-14 text-secondary text-center m-0 p-0">Description : {{one.description|slice:15}}</p>
+                  <div class="text-right mt-4">
+
+
+                  {% if not one_assignee %}
+                     <button type="button" class="btn btn-success px-1 py-0 mr-1 assigneee" data-id = "{{one.project_instance.id}}" user-id = "{{one.user_instance.id}}"><i class="fas fa-check font-14"></i></button>
+                  {% else %}
+                  {% if order_detail.is_cancelled is True or order_detail.is_completed is True %}
+                  {% else %}
+
+                  <button type="button" class="btn btn-success px-1 py-0 mr-1 cancelled" title="Assigned" data-id = "{{one.project_instance.id}}" user-id = "{{one.user_instance.id}}"><i class="fas fa-ban font-14"></i></button>
+                  {% endif %}
+
+                     
+
+                  {% endif %}
+                   <a href="/chat/?id={{one.id}}"><button type="button" class="btn btn-success px-1 py-0 mr-1"><i class="fas fa-envelope font-14"></i></button></a></div>
+                  </div>
+
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+      <script>
+         $(document).on('click','.assigneee',function(){
+            var id = $(this).attr('data-id');
+            var user_id = $(this).attr('user-id');
+
+            swal({
+              title: "Are you sure You Want to Start this Project ?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((ok) => {
+              if (ok) {
+                window.location.href = `/assigned/?id=${id}&user_id=${user_id}`;
+                swal("Success ! Project Assigned, Now you cannot assigned to others!", {
+                  icon: "warning",
+                 dangerMode: true,
+            
+                });
+              } 
+            });
+         
+         })
+         
+
+         $(document).on('click','.cancelled',function(){
+            var id = $(this).attr('data-id');
+            var user_id = $(this).attr('user-id');
+
+            swal({
+              title: "Are you sure You Want to Cancel this Project ?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((ok) => {
+              if (ok) {
+                window.location.href = `/Cancelled/?id=${id}&user_id=${user_id}`;
+                swal("Success ! Project Cancelled, Now you can assigned to others!", {
+                  icon: "warning",
+                 dangerMode: true,
+            
+                });
+              } 
+            });
+         
+         })
+
+      </script>
+
+{% endblock %}

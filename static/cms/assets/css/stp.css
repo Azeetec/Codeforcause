@@ -1,0 +1,29 @@
+.cover-section {
+  background: url("../../assets/images/stp-bg.jpg") no-repeat center; }
+  .cover-section img {
+    width: 480px; }
+  .cover-section .text-style {
+    margin-top: 140px; }
+
+.custom-list ul {
+  list-style: none;
+  margin: 2em;
+  padding: 0; }
+  .custom-list ul li {
+    margin: 0;
+    padding-left: 1.5em;
+    position: relative; }
+    .custom-list ul li:after {
+      content: '';
+      height: .4em;
+      width: .4em;
+      background: #9d9fc6;
+      display: block;
+      position: absolute;
+      transform: rotate(45deg);
+      top: .75em;
+      left: 0; }
+
+@media only screen and (max-width: 767px) {
+  .cover-section .text-style {
+    margin-top: 54px; } }

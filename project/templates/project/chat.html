@@ -1,0 +1,298 @@
+{% extends 'product_category/base/base.html' %}
+{% load static %}
+{% load str_function %}
+
+{% block title %}
+<title> Freelancer |  View Project </title>
+{% endblock %} 
+{% block content %}
+
+<style type="text/css">
+    .form-control.has-error {
+    border: 1px solid #FB404B !important;
+    color: #FB404B !important;
+    }
+    .form-control.has-success {
+    border: 1px solid #28a745 !important;
+    color: #28a745 !important;
+    }
+    .error-msg {
+    color: red;
+    font-size: 13px;
+    margin: 3px;
+    }
+    .live-chat-intro {
+    position: relative;
+    z-index: 1;
+    background-color: black;
+    text-align: center;
+    border-radius: 0 0 3rem 3rem; }
+    .live-chat-intro p {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    padding: 20px;
+    }
+    .live-chat-intro img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto .5rem;
+    display: block; }
+    .live-chat-intro .status {
+    position: relative;
+    z-index: 1;
+    color: black;
+    font-size: 14px;
+    display: inline-block; }
+    .live-chat-intro .status.online {
+    padding-left: 15px; }
+    .live-chat-intro .status.online::after {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+    content: "";
+    margin-top: -5px;
+    top: 50%;
+    left: 0;
+    z-index: 10; }
+    .agent-message-content {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1rem; }
+    .agent-message-content .agent-thumbnail {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 30px;
+    flex: 0 0 30px;
+    max-width: 30px;
+    width: 30px; }
+    .agent-message-content .agent-thumbnail img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px 0 rgba(15, 15, 15, 0.175);
+    background-color: #ffffff;
+    padding: 2px; }
+    .agent-message-content .agent-message-text {
+    position: relative;
+    z-index: 1; }
+    .agent-message-content .agent-message-text span {
+    font-size: 12px;
+    color: #747794;
+    margin-left: 0.5rem;
+    margin-top: 0.25rem;
+    display: block; }
+    .agent-message-content .agent-message-text p {
+    display: inline-block;
+    margin-bottom: 0;
+    background-color: #ffffff;
+    padding: .75rem 1rem .65rem;
+    border-radius: 1rem;
+    border:1px solid }
+    .user-message-content {
+    position: relative;
+    z-index: 1;
+    text-align: right;
+    margin-bottom: 1rem; }
+    .user-message-content .user-message-text {
+    padding-left: 3rem; }
+    .user-message-content .user-message-text p {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: .75rem 1rem .65rem;
+    background-color: black;
+    color: #ffffff;
+    border-radius: 1rem;
+    word-break: break-all; }
+    .user-message-content .user-message-text span {
+    font-size: 12px;
+    display: block;
+    color: #747794;
+    margin-right: 0.5rem;
+    margin-top: 0.25rem; }
+    .type-text-form {
+    position: relative;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 99999; }
+    .type-text-form .form-control {
+    -webkit-transition-duration: 500ms;
+    -o-transition-duration: 500ms;
+    transition-duration: 500ms;
+    width: 100%;
+    height: 55px;
+    border-color: #747794;
+    color: #747794;
+    font-size: 13px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-left: 40px; }
+    .type-text-form .form-control:focus {
+    border-color: transparent; }
+    .type-text-form .file-upload {
+    position: absolute;
+    width: 40px;
+    height: 55px;
+    top: 0;
+    left: 0;
+    z-index: 20; }
+    .type-text-form .file-upload input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    opacity: 0; }
+    .type-text-form .file-upload span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    height: 100%;
+    width: 100%;
+    z-index: 50;
+    text-align: center;
+    line-height: 55px; }
+    .support-wrapper {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    }
+</style>
+<div class="main-container">
+   <div class="pd-ltr-20 xs-pd-20-10">
+              {% if messages %}
+      {% for message in messages %}
+      {% if 'success' in message.tags %}
+      <div class="alert alert-success" id = "msg_Sucess">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% if messages %}
+      {% for message in messages %}
+      {% if 'error' in message.tags %}
+      <div class="alert alert-danger" id="msg_sign_err">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {% if message %}
+      <div class="alert alert-danger" >
+         {{ message }}
+      </div>
+      {% endif %}
+      {% if sucess_msg %}
+      <div class="alert alert-success">
+         {{ sucess_msg }}
+      </div>
+      {% endif %}
+
+        <div class="page-content-wrapper">
+            <!-- Live Chat Intro-->
+            <div class="live-chat-intro mb-3">
+                <p>Start a Conversation With : {{user_details.0.user_id__first_name}} {{user_details.0.user_id__last_name}} </p>
+                <!-- <img class="av_img"  src='{{image_url}}{{user_details.0.avatar}}' alt ="avatar" width="80px">
+                    <div class="status online">We're online</div> -->
+                <!-- .status.offline We’ll be back soon // Use this code for "Offline" Status-->
+            </div>
+            <!-- Support Wrapper-->
+            <div class="support-wrapper py-3" style="border: 1px solid;">
+                <div class="container">
+                    <div class="live-chat-wrapper" id="myadd_div">
+                        {% if thread_list %}
+                        {% for message in thread_list %}
+                        <div class="agent-message-content d-flex align-items-center">
+                            {% if message.sender.id != request.user.id %}
+                            <div class="agent-message-text">
+                                <p> {{message.message}}</p>
+                                <span>{{message.sender.username}}</span><span> {{message.get_timestamp}}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% if message.sender.id == request.user.id %}
+                        <div class="user-message-content">
+                            <div class="user-message-text">
+                                <p> {{message.message}}</p>
+                                <span>{{message.sender.username}}</span><span> {{message.get_timestamp}}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <div class="agent-message-content d-flex align-items-center">
+                            <div class="agent-message-text">
+                            </div>
+                        </div>
+                        <div class="user-message-content">
+                            <div class="user-message-text">
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="type-text-form">
+                        <form method="post" action="javascript:void(0)" id = "ChatForm">
+                            {% csrf_token %}
+                            <input type="hidden" name="offer_id" value="{{offer_id}}">
+
+
+                            <textarea class="form-control" name="message" cols="30" rows="10" id="exact_msg" placeholder="Type your message ..." required="required"></textarea>
+                            <button class="btn button mt-3" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+   </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).on('submit', '#ChatForm', function(e) {
+        var form = $(this);
+        var Url = '/chat/';
+        e.preventDefault();
+        var msgText = $("#exact_msg");
+        var exact_inside_msg = msgText.val();
+
+        var myadd_div = $("#myadd_div");
+        myadd_div.append(`<div class="user-message-content"><div class="user-message-text"><p>${exact_inside_msg}</p><span> {{request.user.username}}</span><span>just now</span></div></div>`);
+
+        data = (form).serialize();
+        msgText.val('');
+
+        $.ajax({
+            type: 'POST',
+            data: data,
+            url: Url,
+
+            success: function(response_by_api) {
+                if (response_by_api['status'] == 200) {
+
+                    null
+
+                } 
+            },
+        })
+    })
+
+    
+    
+    
+    
+    
+</script>
+
+{% endblock %}

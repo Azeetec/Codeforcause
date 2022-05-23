@@ -1,0 +1,15 @@
+.cover-section {
+  background-color: #2d3436;
+  background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+  height: 300px !important;
+  padding: 0 0 0 !important; }
+  .cover-section .text-style {
+    margin-top: 150px; }
+
+.image-frame img {
+  width: 100%;
+  height: 300px; }
+
+.image-frame p {
+  font-size: 14px;
+  padding: 5px 0; }

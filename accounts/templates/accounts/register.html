@@ -1,0 +1,113 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Freelancer | Register {% endblock %}
+{% block content %}
+<div class="col-md-12">
+   <div class="login-box bg-white box-shadow border-radius-10">
+      <div class="login-title">
+         <h2 class="text-center">Register</h2>
+      </div>
+      {% if messages %}
+      {% for message in messages %}
+      {% if 'success' in message.tags %}
+      <div class="alert alert-success" id = "msg_Sucess">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% if messages %}
+      {% for message in messages %}
+      {% if 'error' in message.tags %}
+      <div class="alert alert-danger" id="msg_sign_err">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% if message %}
+      <div class="alert alert-danger" >
+         {{ message }}
+      </div>
+      {% endif %}
+      {% if sucess_msg %}
+      <div class="alert alert-success">
+         {{ sucess_msg }}
+      </div>
+      {% endif %}
+      <form action="{{ request.build_absolute_uri }}" method="post" id="reset_PasswordForm">
+         {% csrf_token %}
+         <div class="input-group custom">
+            <input class="input-psswd form-control" id="email" type="text" placeholder="Enter Email" onkeyup="EmailCheck()" name="email">
+            <div class="input-group-append custom">
+               <span class="input-group-text" ><i style="cursor: pointer;" class="fa fa-envelope-o" aria-hidden="true"></i></span>
+            </div>
+         </div>
+         <span class="error-msg" id="email_label"></span>
+         <div class="input-group custom">
+            <input class="form-control" id="password_id" type="password" placeholder="Enter New Password" onkeyup="CheckPassword()" name="password" minlength="6" maxlength="12">
+            <div class="input-group-append custom">
+               <span class="input-group-text" onclick="show()"><i class="fa fa-eye" aria-hidden="true"></i></span>
+            </div>
+         </div>
+         <span class="error-msg" id="password_label"></span>
+         <div class="input-group custom">
+            <input class="form-control" id="conf_password" type="password" placeholder="Confirm Your Password" onkeyup="Confirm_password()" minlength="6" maxlength="20" name="confirm_password">
+            <div class="input-group-append custom">
+               <span class="input-group-text" onclick="show1()" style="cursor: pointer;"><i style="cursor: pointer;" class="fa fa-eye" aria-hidden="true"></i></span>
+            </div>
+         </div>
+         <span class="error-msg" id="conf_password_label"></span>
+         <div class="input-group custom">
+            <input class="input-psswd form-control" id="username" type="text" placeholder="Enter Username" onkeyup="UserCheck()" name="username">
+            <div class="input-group-append custom">
+               <span class="input-group-text" ><i style="cursor: pointer;" class="fa fa-envelope-o" aria-hidden="true"></i></span>
+            </div>
+         </div>
+         <span class="error-msg" id="username_label"></span>
+         <div class="input-group custom">
+            <input class="input-psswd form-control" id="name" type="text" placeholder="Enter Full Name" onkeyup="FullName()" name="name">
+            <div class="input-group-append custom">
+               <span class="input-group-text" ><i style="cursor: pointer;" class="fa fa-envelope-o" aria-hidden="true"></i></span>
+            </div>
+         </div>
+         <span class="error-msg" id="full_name_label"></span>
+         <div class="input-group custom">
+            <input class="input-psswd form-control" id="phone" type="text" placeholder="Enter Phone" name="phone" >
+            <div class="input-group-append custom">
+               <span class="input-group-text" ><i style="cursor: pointer;" class="fa fa-envelope-o" aria-hidden="true"></i></span>
+            </div>
+         </div>
+         <div class="input-group custom">
+            <select id="role_instance" class="form-control" name="role_instance" onchange="role_name_exact()" >
+               <option value="">------</option>
+               {% for one in role_name_instances %}
+               <option value="{{one.id}}">{{one.role_name|capfirst}}</option>
+               {% endfor %}
+            </select>
+         </div>
+         <span class="error-msg" id="role_name_label"></span>
+         <div class="row align-items-center">
+            <div class="col-5">
+               <div class="input-group mb-0">
+                  <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
+               </div>
+            </div>
+            <div class="col-2">
+               <div class="font-16 weight-600 text-center" data-color="#707373">OR</div>
+            </div>
+            <div class="col-5">
+               <div class="input-group mb-0">
+                  <a class="btn btn-outline-dark btn-lg btn-block" href="/accounts/login/">Login</a>
+               </div>
+            </div>
+         </div>
+      </form>
+      <div class="input-group mb-0">
+         <a class="btn btn-outline-primary btn-lg btn-block" href="/home/">Back to home</a>
+      </div>
+   </div>
+</div>
+</div>
+<script src="{% static 'seller_dashboard/assets/js/accounts/reset.js' %}"></script>
+{% endblock %}

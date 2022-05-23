@@ -1,0 +1,80 @@
+{% extends 'product_category/base/base.html' %}
+{% load static %}
+{% block title %}
+<title> Freelancer |  Project Listing </title>
+{% endblock %} 
+{% block content %}
+<div class="main-container">
+
+
+  <div class="pd-ltr-20 xs-pd-20-10">
+      <div class="card mb-30 shadow p-3">
+              {% if messages %}
+      {% for message in messages %}
+      {% if 'success' in message.tags %}
+      <div class="alert alert-success" id = "msg_Sucess">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% if messages %}
+      {% for message in messages %}
+      {% if 'error' in message.tags %}
+      <div class="alert alert-danger" id="msg_sign_err">
+         {{ message }}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+
+      {% if message %}
+      <div class="alert alert-danger" >
+         {{ message }}
+      </div>
+      {% endif %}
+      {% if sucess_msg %}
+      <div class="alert alert-success">
+         {{ sucess_msg }}
+      </div>
+      {% endif %}
+
+        <h2>Manage Projects <h2>
+
+        <form action="/AddProject/" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row my-3">
+            <div class="col-12 my-2">
+              <label for="account_holder_name">Project Name</label>
+              <input type="text" id="title" class="form-control" placeholder="Project Name" required="" name="title">
+            </div>
+            <div class="col-md-6 my-2">
+              <label for="account_number">Description</label>
+              <input type="text" id="description" class="form-control" placeholder="Description" required="required" name="description">
+            </div>
+            <div class="col-md-6 my-2">
+              <label for="re_enter_account_number">TimeFrame</label>
+              <input type="number" id="timeframe" class="form-control" placeholder="TimeFrame(In Days)" required="required" name="timeframe">
+            </div>
+
+            <div class="col-md-6 my-2">
+              <label for="re_enter_account_number">File Upload</label>
+              <input type="file" id="file" class="form-control" placeholder="Document" name="document">
+            </div>
+
+
+
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <button type="submit" class="btn button mt-3">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+
+</div>
+<div class="footer-wrap py-2 card-box">
+</div>
+{% endblock %}

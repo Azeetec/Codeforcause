@@ -1,0 +1,85 @@
+{% extends 'product_category/base/base.html' %}
+{% load static %}
+{% block title %}
+<title> Freelancer |  Review Order </title>
+{% endblock %} 
+{% block content %}
+<div class="main-container">
+   <div class="pd-ltr-20 xs-pd-20-10">
+      <div class="min-height-100vh">
+         <div class="card mb-30 shadow p-3">
+            <h2>Manage Project</h2>
+         </div>
+         <div class="card shadow my-3">
+            <div class="card-header p-1">
+               <div class="row">
+                  <div class="col-3 text-center">
+                     <small>Order Placed</small>
+                     <br>
+                     <small>{{obj.created_on}}</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>TimeFrame</small>
+                     <br>
+                     <small><i class="fas fa-rupee-sign mr-2"></i>{{obj.project_instance.timeframe}} Days</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>Order By</small>
+                     <br>
+                     <small>{{obj.user_instance.username}}</small>
+                  </div>
+                  <div class="col-3 text-center">
+                     <small>Order ID</small>
+                     <br>
+                     <small># {{obj.id}}</small>
+                  </div>
+               </div>
+            </div>
+            <div class="card-body">
+               <div class="text-right">
+                  <i class="fas fa-circle text-success mr-2"></i>{% if obj.files %}<a href ="{{obj.files.url}}">Doc Download</a> {% else %} No File {% endif %}
+                  {% if obj.is_deliver is True and obj.is_completed is False %}
+                  <a href="#" class="action" data-id="{{obj.id}}"><i class="fas fa-envelope text-success mr-2"></i>Accept Delivery</a>
+                  {% endif %}
+
+
+               </div>
+               <div class="row">
+                  <div class="col-md-12 text-center my-auto">
+                     <h5>Assignee -:{% if obj %}{% if obj.is_completed is True %} Completed {% elif obj.is_revision is True %} Revision {% elif obj.is_deliver is True %} Assigned to {{obj.user_instance.username}} (DELIVERED) {% elif obj.is_cancelled is True %} CANCELLED {% else %} In Progress {% endif %} {% else %} No Developer Yet{% endif %}</h5>
+                     <small class="text-secondary d-none d-md-block">{{obj.description}}</small>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+      <script>
+         $(document).on('click','.action',function(){
+            var id = $(this).attr('data-id');
+
+            swal({
+              title: "Are you sure You Want to Accept this delivery ?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((ok) => {
+              if (ok) {
+                window.location.href = `/ApproveOrNot/?id=${id}`;
+                swal("Success ! Order Completed!", {
+                  icon: "warning",
+                 dangerMode: true,
+            
+                });
+              } 
+            });
+         
+         })
+         
+
+      </script>
+
+{% endblock %}

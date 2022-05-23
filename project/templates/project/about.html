@@ -1,0 +1,72 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} FREELANCER - WEBAPP {% endblock %}
+{% block meta_description %}
+{% endblock %}
+{% block stylesheets %}
+<style type="text/css">
+   .small-avatar {
+   height: 36px;
+   width: 36px;
+   border-radius: 50%;
+   }
+   .small-avatar img {
+   height: 100%;
+   width: 100%;
+   }
+   .fa-circle {
+   font-size: 10px;
+   }
+   @media only screen and (max-width: 767px) {
+   .small-avatar {
+   height: 80px;
+   width: 80px;
+   border-radius: 50%;
+   }
+   }
+</style>
+<link rel="stylesheet" href="{% static 'cms/assets/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'cms/assets/css/blog_card.css' %}">
+{% endblock stylesheets %}
+{% block loader %}
+
+{% endblock loader %}
+{% block content %}
+<div class="overlayer" id="loaderContainer">
+   <div class="overlayDoor"></div>
+   <div class="overlayContent">
+      <div class="loader">
+         <div class="inner"></div>
+      </div>
+   </div>
+</div>
+
+
+<div class="container margin-2">
+   <div class="heading-style-2">
+      <h1 class="text-center text-uppercase text-shadow">About us</h1>
+   </div>
+   <p class="mt-2 text-center">
+Code for cause will be a platform where developers can support non-profit organizations with their skills
+instead of money. It will connect the software developers and the small organizations who want help in
+Information Systems. The client of this project is the non-profit organizations, that don’t have the budget to
+hire a company or individual for required IT Work. The clients also include developers who are looking to
+support any organization/cause with their time and skill and the naïve developers that are new in the field of
+software development and are looking to make live projects to make their portfolio. The platform will end
+the search of the people who want to get the development jobs and will also end the search of the
+organizations who want to find developers for software development in different technologies.
+
+   </p>
+
+   <br>
+
+
+   </p>
+   {% comment %}
+   <div class="row mt-4 justify-content-center">
+
+   </div>
+   {% endcomment %}
+</div>
+
+{% endblock %}

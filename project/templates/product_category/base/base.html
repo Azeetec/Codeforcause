@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Basic Page Info -->
+      <meta charset="utf-8">
+      {% block title %}
+      <title>Users</title>
+      {% endblock %}
+      <!-- Site favicon -->
+      <!-- Mobile Specific Metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+      <!-- Google Font -->
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+         crossorigin="anonymous" referrerpolicy="no-referrer"/>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+      <!-- CSS -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/vendors/styles/core.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/vendors/styles/icon-font.min.css'%}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/src/styles/jquery-jvectormap-2.0.3.css'%}">
+      <link rel="stylesheet" href="{% static 'assets/src/styles/jquery.dataTables.min.css'%}">
+      <!-- Add the slick-theme.css if you want default styling -->
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/src/styles/dataTables.bootstrap4.min.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/src/styles/responsive.bootstrap4.min.css' %}">
+      <!-- Add the slick-theme.css if you want default styling -->
+      <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+      <link rel="stylesheet" href="{% static 'assets/vendors/styles/custom.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/vendors/styles/style.css' %}">
+      <script src="{% static 'seller_dashboard/assets/js/common/jquery.min.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'assets/vendors/styles/custom.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/vendors/styles/style.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/vendors/styles/invoice.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/multiselect/bootstrap-multiselect.css' %}" />
+      <style type="text/css">
+         .colour_fade{
+         color: #ee3c7f;
+         }
+         button.swal-button.swal-button--cancel {
+         background-color: transparent;
+         border: 1px solid #ee3c7f;
+         color: #ee3c7f;
+         }
+         button.swal-button.swal-button--confirm {
+         background-color: #ee3c7f !important;
+         border: 1px solid #ee3c7f;
+         }
+         .swal-footer{
+         text-align: center;
+         }
+      </style>
+   <body>
+      <div class="header">
+         <div class="header-left">
+            <div class="menu-icon dw dw-menu"></div>
+            <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+         </div>
+         <div class="header-right">
+            <div class="user-info-dropdown">
+               <div class="dropdown">
+                  <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                  <span class="user-icon">
+                  <img src="{% static 'assets/vendors/images/photo1.jpg' %}" alt="">
+                  </span>
+                  <span class="user-name">{{request.user.username|capfirst|slice:10}}</span>
+                  </a>
+                  {% if request.user.role_instance.role_name == 'Non-Profit' %}
+
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                     <a class="dropdown-item" href="#" id="logout_button"><i class="dw dw-logout"></i> Log Out</a>
+                  </div>
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="left-side-bar">
+         <div class="brand-logo">
+            <a href="#">
+            <img src="{% static 'assets/vendors/images/logo.png' %}" alt="" class="dark-logo">
+            <img src="{% static 'assets/vendors/images/logo.png' %}" alt="" class="light-logo">
+            </a>
+            <div class="close-sidebar" data-toggle="left-sidebar-close">
+               <i class="ion-close-round"></i>
+            </div>
+         </div>
+         <div class="menu-block customscroll">
+            <div class="sidebar-menu">
+               <ul id="accordion-menu">
+                  <br><br>
+                  {% if request.user.role_instance.role_name == 'Non-Profit' %}
+                  <li class="dropdown">
+                     <a href="/DeveloperListing/" class="dropdown-toggle no-arrow">
+                     <span class="micon fas fa-tachometer-alt"></span><span class="mtext">Developer Listing</span>
+                     </a>
+                  </li>
+                  <li class="dropdown">
+                     <a href="/AddProject/" class="dropdown-toggle no-arrow">
+                     <span class="micon fas fa-tachometer-alt"></span><span class="mtext">Project Add</span>
+                     </a>
+                  </li>
+                  <li class="dropdown">
+                     <a href="/" class="dropdown-toggle no-arrow">
+                     <span class="micon fas fa-tachometer-alt"></span><span class="mtext">Project Listing</span>
+                     </a>
+                  </li>
+                  <li class="dropdown">
+                     <a href="/profile/" class="dropdown-toggle no-arrow">
+                     <span class="micon fas fa-tachometer-alt"></span><span class="mtext">Profile</span>
+                     </a>
+                  </li>
+
+
+                  {% elif request.user.role_instance.role_name == 'Developer' %}
+                  <li class="dropdown">
+                     <a href="/profile/" class="dropdown-toggle no-arrow">
+                     <span class="micon fas fa-tachometer-alt"></span><span class="mtext">Profile</span>
+                     </a>
+                  </li>
+
+                  <li class="dropdown">
+                     <a href="/developer_project/" class="dropdown-toggle no-arrow">
+                     <span class="micon fas fa-tachometer-alt"></span><span class="mtext">Projects</span>
+                     </a>
+                  </li>
+
+                  <li class="dropdown">
+                     <a href="#" class="dropdown-toggle no-arrow" id="logout_button">
+                     <span class="micon fas fa-tachometer-alt"></span><span class="mtext">Logout</span>
+                     </a>
+                  </li>
+
+                  {% endif %}
+
+
+
+               </ul>
+            </div>
+         </div>
+      </div>
+      {% block content %}
+      {% endblock %}
+      <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+      <script src="{% static 'assets/vendors/scripts/core.js'%}"></script>
+      <script src="{% static 'assets/vendors/scripts/script.min.js'%}"></script>
+      <script src="{% static 'assets/vendors/scripts/process.js' %}"></script>
+      <script src="{% static 'assets/vendors/scripts/layout-settings.js' %}"></script>
+      <script src="{% static 'assets/src/scripts/jquery.knob.min.js' %}"></script>
+      <script src="{% static 'assets/src/scripts/jquery.dataTables.min.js' %}"></script>
+      <script src="{% static 'assets/src/scripts/responsive.bootstrap4.min.js' %}"></script>
+      <script src="{% static 'assets/src/scripts/custom.js' %}"></script>
+      <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+      <script src="{% static 'assets/vendors/scripts/dashboard2.js' %}"></script>
+      <script src="{% static 'seller_dashboard/assets/js/common/sweetalert.min.js' %}"></script>
+      <script src="{% static 'assets/multiselect/bootstrap-multiselect.js' %}"></script>
+      <script src="{% static 'assets/multiselect/bootstrap3-typeahead.min.js' %}"></script>
+      <script>
+         $(document).on('click','#logout_button',function(){
+         swal({
+           title: "Are you sure You Want to Logout ?",
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+         })
+         .then((ok) => {
+           if (ok) {
+             window.location.href = '/accounts/AdminLogoutView/';
+             swal("Success ! your account has been Logout!", {
+               icon: "warning",
+              dangerMode: true,
+         
+             });
+           } 
+         });
+         
+         })
+         
+      </script>
+   </body>
+</html>

@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8">
+	<title>{% block title %} Login {% endblock %}</title>
+
+	<!-- Site favicon -->
+	<link rel="manifest" href="{% static 'seller_dashboard/assets/favicon_package_v0.16/site.webmanifest' %}">
+	<link rel="mask-icon" href="{% static 'seller_dashboard/assets/favicon_package_v0.16/safari-pinned-tab.svg' %}" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'seller_dashboard/assets/vendors/styles/core.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'seller_dashboard/assets/vendors/styles/icon-font.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'seller_dashboard/assets/vendors/styles/style.css' %}">
+	<link rel="stylesheet" href="{% static 'seller_dashboard/assets/vendors/styles/custom.css' %}">
+	<script src="{% static 'seller_dashboard/assets/js/common/jquery.min.js' %}"></script>
+
+</head>
+<body class="login-page">
+	<div class="login-header box-shadow">
+		<div class="container-fluid d-flex justify-content-between align-items-center">
+			<div class="brand-logo-login">
+				<a href="login.html">
+					<img src="{% static 'seller_dashboard/assets/vendors/images/favicon-16x16.png' %}" alt="">
+				</a>
+			</div>
+			<!--<div class="login-menu">
+				<ul>
+					<li><a href="register.html">Register</a></li>
+				</ul>
+			</div>-->
+		</div>
+	</div>
+	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+		<div class="container">
+			<div class="row align-items-center">
+				{% block content %}
+
+				
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+	<!-- js -->
+	<script src="{% static 'seller_dashboard/assets/vendors/scripts/core.js' %}"></script>
+	<script src="{% static 'seller_dashboard/assets/vendors/scripts/script.min.js' %}"></script>
+	<script src="{% static 'seller_dashboard/assets/vendors/scripts/process.js' %}"></script>
+	<script src="{% static 'seller_dashboard/assets/vendors/scripts/layout-settings.js' %}"></script>
+</body>
+</html>
+
+	<script src="{% static 'seller_dashboard/assets/vendors/scripts/process.js' %}"></script>
+	<script src="{% static 'seller_dashboard/assets/vendors/scripts/layout-settings.js' %}"></script>
+</body>
+</html>
+

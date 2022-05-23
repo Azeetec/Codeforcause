@@ -1,0 +1,82 @@
+$primary-color: #9d9fc6;
+$base-color: black;
+
+
+.cover-section {
+  background: url('../../assets/images/promotion.jpg') no-repeat center;
+    img {
+      width: 480px;
+    }
+  .text-style {
+    margin-top: 150px;
+  }
+}
+.device-info {
+  img {
+    width: 500px;
+  }
+}
+.icon-bg {
+  background-color: $primary-color;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  margin: auto 3px;
+  box-shadow: 0 3px 5px rgba(156, 159, 226, 0.77);
+  transition: all 1s ease;
+  display: inline-block;
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  &:hover {
+    background: white;
+    color: $primary-color;
+  }
+}
+
+.custom-list {
+  display: flex;
+  justify-content: center;
+
+  ul {
+    list-style: none;
+    margin: 2em 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding-left: 1.5em;
+      position: relative;
+
+      &:after {
+        content: '';
+        height: .4em;
+        width: .4em;
+        background: #9d9fc6;
+        display: block;
+        position: absolute;
+        transform: rotate(45deg);
+        top: .75em;
+        left: 0;
+      }
+
+    }
+
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .cover-section {
+    .text-style {
+      margin-top: 18px;
+      margin-bottom: 54px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+-: First run this command. 
+
+	python manage.py shell
+
+	Make sure you are running this command under virtual env.
+
+	Import Tables and run following queries --:
+
+
+from accounts.models import Master_Role
+
+Master_Role.objects.create(role_name = 'Developer')
+Master_Role.objects.create(role_name = 'Non-Profit')
+

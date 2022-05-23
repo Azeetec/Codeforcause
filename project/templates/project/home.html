@@ -1,0 +1,155 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %} FREELANCER - WEBAPP {% endblock %}
+{% block meta_description %}
+{% endblock %}
+{% block stylesheets %}
+<style type="text/css">
+   .small-avatar {
+   height: 36px;
+   width: 36px;
+   border-radius: 50%;
+   }
+   .small-avatar img {
+   height: 100%;
+   width: 100%;
+   }
+   .fa-circle {
+   font-size: 10px;
+   }
+   @media only screen and (max-width: 767px) {
+   .small-avatar {
+   height: 80px;
+   width: 80px;
+   border-radius: 50%;
+   }
+   }
+</style>
+<link rel="stylesheet" href="{% static 'cms/assets/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'cms/assets/css/blog_card.css' %}">
+{% endblock stylesheets %}
+{% block loader %}
+<!--<div class="loader">
+   <div class="loader-item loader-item_1"></div>
+   <div class="loader-item loader-item_2"></div>
+   <div class="loader-item loader-item_3"></div>
+   <div class="loader-item loader-item_4"></div>
+   </div>-->
+<!--<div class="loader" id="loader">
+   <div class="auto-center"></div>
+   <div class="bounce-conteneur">
+   <div class="bounce bounce-left"></div>
+   <div class="bounce bounce-center"></div>
+   <div class="bounce bounce-right"></div>
+   </div>-->
+<!-- <div id="loaderContainer"></div>
+   --><!-- <script>
+   const lastUrl = document.referrer;
+   const loaderContainer = document.getElementById('loaderContainer');
+   if (lastUrl.length) {
+       const host = new URL(lastUrl) || null;
+       if (host.hostname.indexOf('liveleaders') === -1)
+           loaderContainer.classList.add('loader');
+   } else loaderContainer.classList.add('loader');
+   </script> -->
+{% endblock loader %}
+{% block content %}
+<div class="overlayer" id="loaderContainer">
+   <div class="overlayDoor"></div>
+   <div class="overlayContent">
+      <div class="loader">
+         <div class="inner"></div>
+      </div>
+   </div>
+</div>
+<script>
+   const lastUrl = document.referrer;
+   const loaderContainer = document.getElementById('loaderContainer');
+   if(lastUrl.length) {
+       const host = new URL(lastUrl);
+       if (host?.hostname.indexOf('') > -1) {
+           loaderContainer.classList.add('loaded');
+           loaderContainer.style.display = 'none';
+       }
+   }
+</script>
+<!------------------------------Cover Page------------------------------->
+<div class="cover-section">
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-6 pr-0" data-aos="fade-in"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            data-aos-once="false">
+            <div class="text-style">
+               <div class="heading-style-1">
+                  <h1 class="" style="letter-spacing: 2px"><span style="font-size: 70px; color: #EE3C7F"
+                     class="font-weight-bold">NON Profit organizations
+                     <span style="font-size: 50px">| Code for cause
+                  </h1>
+               </div>
+               <p class="mt-3 mb-5"> A Place where organizations can find helpul hands.  
+               </p>
+            </div>
+         </div>
+         <div class="col-lg-6 text-center device-info" data-aos="zoom-in-up"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            data-aos-once="false">
+            <img src="{% static 'cms/assets/images/device-1.png' %}" alt="image">
+         </div>
+      </div>
+   </div>
+</div>
+<!--<div class="container margin-1">
+   <div class="row justify-content-center">
+       <div class="col-md-8 text-center p-0">
+           <video id="video" width="100%" controls autoplay>
+               <source src="assets/videos/logo-video.mp4" type="video/mp4">
+           </video>
+       </div>
+   </div>
+   </div>-->
+<!---------------------------------4 Cards--------------------------->
+<div class="bg-light py-5">
+   <div class="heading-style-2">
+      <h1 class="text-center text-uppercase mb-4 text-shadow">Freelancers</h1>
+   </div>
+   <section class="grid-section">
+      <div class="header-section">
+         <div class="more-btn">
+
+         </div>
+      </div>
+      {% for one_log in all_freelancers %}
+      <a href="#" class="text-decoration-none">
+         <article class="blog-card">
+            <div class="blog-card__image">
+               {% if one_log.image %}
+               <img src="{{one_log.image.url}}">
+               {% else %}
+               <img src="{% static 'cms/assets/images/device-1.png' %}">
+               {% endif %}
+
+            </div>
+            <div class="blog-card__title">
+               <h6 class="text-left p-1"> {{ one_log.username|capfirst }} </h6>
+               <p> {{one_log.first_name}} {{one_log.last_name}} </p>
+            </div>
+            <div class="blog-card__details">
+               <span class="blog-card__details--time"><i class="fas fa-history mr-1"></i>{{one_log.date_created}} </span>
+               <!--                <span class="blog-card__details--like"><i class="fa fa-heart"></i> 15 </span>-->
+      <a href="" class="blog-card__details--view"><i class="fa fa-eye"></i> Read More </a>
+      </div>
+      </article>
+      </a>
+      {% endfor %}
+   </section>
+</div>
+{% endblock content %}
+{% block javascripts %}
+{% endblock javascripts %}

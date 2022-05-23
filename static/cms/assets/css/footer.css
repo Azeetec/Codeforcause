@@ -1,0 +1,92 @@
+.large-footer {
+  background: url("../../assets/images/footer-bg.jpg") no-repeat center;
+  background-size: cover;
+  color: white;
+  padding: 100px 0 70px;
+  margin-top: 8rem;
+  position: relative; }
+  .large-footer .footer-icon img {
+    width: 100px; }
+  .large-footer .footer-content .heading-style-3 h5 {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s; }
+    .large-footer .footer-content .heading-style-3 h5:before {
+      width: 28px;
+      height: 5px;
+      display: block;
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 20%;
+      margin-left: -14px;
+      background-color: white; }
+    .large-footer .footer-content .heading-style-3 h5:after {
+      width: 100px;
+      height: 1px;
+      display: block;
+      content: "";
+      position: relative;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      left: 20%;
+      margin-left: -50px;
+      background-color: white; }
+  .large-footer .footer-content a {
+    font-size: 14px;
+    transition: all 1s ease; }
+    .large-footer .footer-content a:hover {
+      color: #EE3C7F; }
+
+@media only screen and (max-width: 767px) {
+  .large-footer .footer-content .heading-style-3 h5 {
+    margin-top: 20px; }
+    .large-footer .footer-content .heading-style-3 h5:before {
+      left: 14%; }
+    .large-footer .footer-content .heading-style-3 h5:after {
+      left: 14%; } }
+
+.small-footer {
+  background-color: #ee3c7f8c;
+  border: 3px solid #EE3C7F;
+  padding: 20px;
+  border-radius: 12px;
+  color: black;
+  position: absolute;
+  top: -84px; }
+
+.social-icon {
+  background-color: white;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  text-align: center;
+  color: black;
+  border-radius: 50%;
+  margin: auto 3px;
+  box-shadow: 0 3px 5px #ee3c7f94;
+  transition: all 1s ease;
+  display: inline-block; }
+  .social-icon i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); }
+  .social-icon:hover {
+    color: #EE3C7F; }
+
+.footer-transparent {
+  background: linear-gradient(rgba(0, 0, 0, 0.62), black);
+  padding: 8px;
+  text-align: center;
+  color: white; }
+  .footer-transparent p {
+    padding: 0;
+    margin: 0; }
+  .footer-transparent a:hover {
+    color: #EE3C7F; }
